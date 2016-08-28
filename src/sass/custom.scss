@@ -1,0 +1,104 @@
+//----- Constants
+
+$borderColor: #b3afa4;
+$navbarHeight: 5em;
+$bannerHeight: calc(100vh - 10em );
+
+
+//----- Extends
+%clearfix:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+
+html,
+body {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+
+.navbar {
+  @extend %clearfix;
+  width: 100%;
+  height: $navbarHeight;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  flex: 1;
+  font-size: 2em;
+  padding-left: 2%;
+  float: left;
+}
+
+span.menu {
+  font-size: 1em;
+  margin-right: 5em;
+  & a {
+    padding-right: 1em;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+section.page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.banner {
+  height: $bannerHeight;
+  background: linear-gradient(90deg, blue, transparent 99%);
+}
+
+#projects {
+  background: rgba(150,150,150,0.5);
+  & h2 {
+    font-size: 3em;
+    padding: 1em;
+    max-width: 350px;
+    text-align: center;
+    margin: auto;
+  }
+}
+
+.project-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.project-image {
+  border-radius: 50%;
+  padding: 2em;
+  transition: 1s filter, 1s -webkit-filter;
+	-webkit-filter: sepia();
+	filter: sepia();
+  &:hover {
+    -webkit-filter: none;
+    filter: none;
+  }
+}
+
+.footer {
+  width: 100vw;
+  height: 25vh;
+  background: black;
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
+and (orientation : portrait) {
+  .navbar {
+    height: 10em;
+  }
+  .banner {
+    height: calc(100vh - 30em);
+  }
+}
