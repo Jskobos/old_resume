@@ -78,7 +78,7 @@ var MainView = function () {
     key: "render",
     value: function render() {
       var projects = this.controller.getProjects(),
-          size = 200,
+          size = 180,
           container = $('#projects div'),
           node = void 0;
       var _iteratorNormalCompletion = true;
@@ -89,7 +89,7 @@ var MainView = function () {
         for (var _iterator = projects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var p = _step.value;
 
-          node = new Image(size, size);
+          node = new Image();
           node.src = p.imageUrl;
           node.className = "project-image";
           container.append(node);

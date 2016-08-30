@@ -5,11 +5,11 @@ class MainView {
 
   render() {
     let projects    = this.controller.getProjects(),
-        size        = 200,
+        size        = 180,
         container   = $('#projects div'),
         node;
     for (let p of projects) {
-      node = new Image(size,size);
+      node = new Image();
       node.src = p.imageUrl;
       node.className = "project-image";
       container.append(node);

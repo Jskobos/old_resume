@@ -1,8 +1,10 @@
 //----- Constants
 
 $borderColor: #b3afa4;
-$navbarHeight: 5em;
-$bannerHeight: calc(100vh - 10em );
+$navbarHeight: 6em;
+$bannerHeight: calc(100vh - 12em );
+$modalHeight: 350px;
+$modalWidth: 600px;
 
 
 //----- Extends
@@ -10,6 +12,24 @@ $bannerHeight: calc(100vh - 10em );
     display:block;
     clear:both;
     content:'';
+}
+
+%modal {
+  display: none;
+  position: fixed;
+  overflow: hidden;
+  top: calc(50% - #{$modalHeight} / 2);
+  height: $modalHeight;
+  width: $modalWidth;
+  margin: 0 calc(50% - #{$modalWidth} / 2 );
+  //border-radius: 3% / 5%;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+
+
 }
 
 
@@ -20,6 +40,7 @@ body {
   margin: 0;
 }
 
+
 .navbar {
   @extend %clearfix;
   width: 100%;
@@ -27,22 +48,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.name {
-  flex: 1;
-  font-size: 2em;
-  padding-left: 2%;
-  float: left;
-}
-
-span.menu {
-  font-size: 1em;
-  margin-right: 5em;
-  & a {
-    padding-right: 1em;
-    text-decoration: none;
-    color: inherit;
+  & .name {
+    flex: 1;
+    font-size: 2em;
+    padding-left: 5%;
+    float: left;
+  }
+  & span.menu {
+    font-size: 1em;
+    margin-right: 5em;
+    & a {
+      padding-right: 1em;
+      text-decoration: none;
+      color: inherit;
+    }
   }
 }
 
@@ -57,7 +76,7 @@ section.page {
 }
 
 #projects {
-  background: rgba(150,150,150,0.5);
+  background: rgba(150,150,150,0.4);
   & h2 {
     font-size: 3em;
     padding: 1em;
@@ -76,8 +95,11 @@ section.page {
 }
 
 .project-image {
-  border-radius: 50%;
-  padding: 2em;
+  height: 125px;
+  width: 200px;
+  border-radius: 2% / 4%;
+  box-shadow: 0 0 5px black;
+  margin: 2em;
   transition: 1s filter, 1s -webkit-filter;
 	-webkit-filter: sepia();
 	filter: sepia();
@@ -91,6 +113,11 @@ section.page {
   width: 100vw;
   height: 25vh;
   background: black;
+}
+
+#project-modal {
+  @extend %modal;
+  text-align: center;
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
