@@ -41,6 +41,9 @@ section.page {
   display: flex;
   justify-content: center;
   align-items: center; }
+  #projects figcaption {
+    text-align: center;
+    font-size: 1.3em; }
 
 .project-image {
   height: 125px;

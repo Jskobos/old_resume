@@ -2,18 +2,29 @@ class MainView {
   constructor(controller) {
     this.controller = controller;
     this.setScrollingLinks();
+    this.setModal();
   }
 
   render() {
     let projects    = this.controller.getProjects(),
         size        = 180,
         container   = $('#projects'),
-        node;
+        figure, img, caption;
     for (let p of projects) {
-      node = new Image();
-      node.src = p.imageUrl;
-      node.className = "project-image";
-      container.append(node);
+      figure = document.createElement('figure');
+      caption = document.createElement('figcaption');
+      img = new Image();
+      img.src = p.imageUrl;
+      img.className = "project-image";
+      figure.addEventListener('click', function(e) {
+        e.defaultPrevented;
+        $('#project-modal').fadeIn();
+        e.stopPropagation();
+      });
+      figure.appendChild(img);
+      figure.appendChild(caption);
+      caption.innerHTML = p.name;
+      container.append(figure);
     }
   }
 
@@ -30,6 +41,17 @@ class MainView {
         }
       }
     });
+  }
+
+
+  setModal() {
+    $(document).click(function(event) {
+    if(!$(event.target).closest('#project-modal').length) {
+        if($('#project-modal').is(":visible")) {
+            $('#project-modal').fadeOut();
+        }
+      }
+    })
   }
 }
 
