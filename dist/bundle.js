@@ -57,7 +57,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MainCtrl = new _MainController2.default();
 
 },{"./MainController":1}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -72,14 +72,15 @@ var MainView = function () {
     _classCallCheck(this, MainView);
 
     this.controller = controller;
+    this.setScrollingLinks();
   }
 
   _createClass(MainView, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       var projects = this.controller.getProjects(),
           size = 180,
-          container = $('#projects div'),
+          container = $('#projects'),
           node = void 0;
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
@@ -108,6 +109,22 @@ var MainView = function () {
           }
         }
       }
+    }
+  }, {
+    key: 'setScrollingLinks',
+    value: function setScrollingLinks() {
+      $('a[href*="#"]:not([href="#"])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+          if (target.length) {
+            $('html, body').animate({
+              scrollTop: target.offset().top
+            }, 1000);
+            return false;
+          }
+        }
+      });
     }
   }]);
 

@@ -1,10 +1,12 @@
+@import 'modal';
+
+
 //----- Constants
 
 $borderColor: #b3afa4;
 $navbarHeight: 6em;
 $bannerHeight: calc(100vh - 12em );
-$modalHeight: 350px;
-$modalWidth: 600px;
+
 
 
 //----- Extends
@@ -13,25 +15,6 @@ $modalWidth: 600px;
     clear:both;
     content:'';
 }
-
-%modal {
-  display: none;
-  position: fixed;
-  overflow: hidden;
-  top: calc(50% - #{$modalHeight} / 2);
-  height: $modalHeight;
-  width: $modalWidth;
-  margin: 0 calc(50% - #{$modalWidth} / 2 );
-  //border-radius: 3% / 5%;
-  color: white;
-  background: rgba(0,0,0,0.6);
-  box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
-
-
-}
-
 
 html,
 body {
@@ -77,22 +60,11 @@ section.page {
 
 #projects {
   background: rgba(150,150,150,0.4);
-  & h2 {
-    font-size: 3em;
-    padding: 1em;
-    max-width: 350px;
-    text-align: center;
-    margin: auto;
-  }
-}
-
-.project-list {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
+
 
 .project-image {
   height: 125px;
@@ -116,7 +88,8 @@ section.page {
 }
 
 #project-modal {
-  @extend %modal;
+  @include modal(600px,350px);
+  display: none;
   text-align: center;
 }
 
