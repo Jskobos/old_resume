@@ -26,7 +26,10 @@ body {
     .navbar span.menu a {
       padding-right: 1em;
       text-decoration: none;
-      color: inherit; }
+      color: inherit;
+      transition: 1s; }
+      .navbar span.menu a:hover {
+        text-shadow: 0 0 .2em silver, 0 0 .5em silver; }
 
 section.page {
   height: 100vh;

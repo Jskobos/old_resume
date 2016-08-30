@@ -1,23 +1,24 @@
 class MainView {
   constructor(controller) {
     this.controller = controller;
+    this.currentProject = '';
     this.setScrollingLinks();
     this.setModal();
   }
 
   render() {
     let projects    = this.controller.getProjects(),
-        size        = 180,
         container   = $('#projects'),
         figure, img, caption;
-    for (let p of projects) {
+    projects.forEach((p) => {
       figure = document.createElement('figure');
       caption = document.createElement('figcaption');
       img = new Image();
       img.src = p.imageUrl;
       img.className = "project-image";
-      figure.addEventListener('click', function(e) {
+      figure.addEventListener('click', (e) => {
         e.defaultPrevented;
+        this.renderModalText(p);
         $('#project-modal').fadeIn();
         e.stopPropagation();
       });
@@ -25,7 +26,7 @@ class MainView {
       figure.appendChild(caption);
       caption.innerHTML = p.name;
       container.append(figure);
-    }
+    });
   }
 
   setScrollingLinks() {
@@ -43,6 +44,9 @@ class MainView {
     });
   }
 
+  renderModalText(project) {
+    console.log(project.description);
+  }
 
   setModal() {
     $(document).click(function(event) {

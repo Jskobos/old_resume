@@ -72,6 +72,7 @@ var MainView = function () {
     _classCallCheck(this, MainView);
 
     this.controller = controller;
+    this.currentProject = '';
     this.setScrollingLinks();
     this.setModal();
   }
@@ -79,49 +80,30 @@ var MainView = function () {
   _createClass(MainView, [{
     key: 'render',
     value: function render() {
+      var _this = this;
+
       var projects = this.controller.getProjects(),
-          size = 180,
           container = $('#projects'),
           figure = void 0,
           img = void 0,
           caption = void 0;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = projects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var p = _step.value;
-
-          figure = document.createElement('figure');
-          caption = document.createElement('figcaption');
-          img = new Image();
-          img.src = p.imageUrl;
-          img.className = "project-image";
-          figure.addEventListener('click', function (e) {
-            e.defaultPrevented;
-            $('#project-modal').fadeIn();
-            e.stopPropagation();
-          });
-          figure.appendChild(img);
-          figure.appendChild(caption);
-          caption.innerHTML = p.name;
-          container.append(figure);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
+      projects.forEach(function (p) {
+        figure = document.createElement('figure');
+        caption = document.createElement('figcaption');
+        img = new Image();
+        img.src = p.imageUrl;
+        img.className = "project-image";
+        figure.addEventListener('click', function (e) {
+          e.defaultPrevented;
+          _this.renderModalText(p);
+          $('#project-modal').fadeIn();
+          e.stopPropagation();
+        });
+        figure.appendChild(img);
+        figure.appendChild(caption);
+        caption.innerHTML = p.name;
+        container.append(figure);
+      });
     }
   }, {
     key: 'setScrollingLinks',
@@ -138,6 +120,11 @@ var MainView = function () {
           }
         }
       });
+    }
+  }, {
+    key: 'renderModalText',
+    value: function renderModalText(project) {
+      console.log(project.description);
     }
   }, {
     key: 'setModal',
@@ -185,18 +172,27 @@ Object.defineProperty(exports, "__esModule", {
 var projects = [{
   name: 'Frogger',
   hover: "Clone of classic arcade game, project from Udacity Javascript course.",
-  imageUrl: "http://www.placekitten.com/250/250",
-  link: "http://www.github.com/Jskobos"
+  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/frogger_landscape.png",
+  link: "http://www.github.com/Jskobos",
+  liveUrl: "#",
+  sourceUrl: "https://github.com/Jskobos/frontend-nanodegree-arcade-game",
+  description: "This is a recommended project from the Udacity Frontend Engineer Nanodegree program. The game engine is provided by Udacity, and implementation is left to the students. I added scoring and gem rewards in addition to the basic game requirements."
 }, {
   name: 'Inventory Tracker',
   hover: "Simple to-do application used at my old ESL school in Shanghai.",
-  imageUrl: "http://www.placekitten.com/250/250",
-  link: "http://www.github.com/Jskobos"
+  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/inventory.png",
+  link: "http://www.github.com/Jskobos",
+  liveUrl: "https://shanghaipads.herokuapp.com",
+  sourceUrl: "https://github.com/Jskobos/shanghai10",
+  description: "To-do app I made for my old ESL school in Shanghai. Angular.js app with Firebase for backend storage. The only one of my solo projects to have had a small number of regular users over more than a year."
 }, {
   name: 'Future Project',
   hover: "Something brilliant and creative.",
   imageUrl: "http://www.placekitten.com/250/250",
-  link: "http://www.github.com/Jskobos"
+  link: "http://www.github.com/Jskobos",
+  liveUrl: "#",
+  sourceUrl: "#",
+  description: "Something brilliant and creative."
 }];
 
 exports.projects = projects;

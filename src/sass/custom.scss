@@ -44,6 +44,10 @@ body {
       padding-right: 1em;
       text-decoration: none;
       color: inherit;
+      transition: 1s;
+      &:hover {
+        text-shadow: 0 0 .2em silver, 0 0 .5em silver;
+      }
     }
   }
 }
