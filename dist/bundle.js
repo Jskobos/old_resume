@@ -124,11 +124,18 @@ var MainView = function () {
   }, {
     key: 'renderModalText',
     value: function renderModalText(project) {
-      console.log(project.description);
+      $('.project-description').text(project.description);
+      $('.live-link a').attr('href', project.liveUrl);
+      $('.source-link a').attr('href', project.sourceUrl);
+      $('.project-modal-header h3').text(project.name);
+      $('.modal-image').attr('src', project.imageUrl);
     }
   }, {
     key: 'setModal',
     value: function setModal() {
+      $('.ion-close').click(function (event) {
+        $('#project-modal').fadeOut();
+      });
       $(document).click(function (event) {
         if (!$(event.target).closest('#project-modal').length) {
           if ($('#project-modal').is(":visible")) {

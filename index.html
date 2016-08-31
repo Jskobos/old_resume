@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/grid.css" />
   <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 </head>
 <body>
   <main>
@@ -13,7 +14,6 @@
       <div class="navbar">
         <span class="name">Jared Kobos</span>
         <span class="menu">
-          <a href="#">Bio</a>
           <a href="#projects">Portfolio</a>
           <a href="#">Contact</a>
           <a href="#">中文</a>
@@ -32,22 +32,22 @@
 
   </main>
 
-  <section id="project-modal">
+  <section id="project-modal" class="modal">
     <div class="project-modal-header">
-
+      <h3></h3>
+      <span class="ion-close"></span>
     </div>
     <div class="project-modal-body">
       <div class="modal-image-box">
-
+        <img class="modal-image" src="" alt="Project Image" />
       </div>
       <div class="project-modal-content">
         <p class="project-description"></p>
-        <p class="live-link"></p>
-        <p class="source-link"></p>
+        <div>
+          <p class="live-link"><a href="#" target="_blank">View live site</a></p>
+          <p class="source-link"><a href="#" target="_blank">View source</a></p>
+        </div>
       </div>
-    </div>
-    <div class="project-modal-footer">
-      <button>Close</button>
     </div>
   </section>
 
