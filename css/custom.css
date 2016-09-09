@@ -39,8 +39,9 @@ section.page {
   width: 100vw; }
 
 .banner {
-  height: calc(100vh - 12em);
-  background: linear-gradient(90deg, blue, transparent 99%); }
+  height: calc(100vh - 6em);
+  width: 100%;
+  background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); }
 
 #projects {
   display: flex;
