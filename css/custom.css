@@ -9,12 +9,15 @@ body {
   width: 100%;
   margin: 0; }
 
+main {
+  transition: 0.5s; }
+
 .navbar {
   width: 100%;
   height: 6em;
   display: flex;
-  justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  justify-content: space-between; }
   .navbar .name {
     flex: 1;
     font-size: 2em;
@@ -40,10 +43,9 @@ section.page {
   background: linear-gradient(90deg, blue, transparent 99%); }
 
 #projects {
-  background: rgba(150, 150, 150, 0.4);
   display: flex;
-  justify-content: center;
-  align-items: center; }
+  align-items: center;
+  justify-content: center; }
   #projects figcaption {
     text-align: center;
     font-size: 1.3em; }
@@ -55,8 +57,8 @@ section.page {
   box-shadow: 0 0 5px black;
   margin: 2em;
   transition: 1s filter, 1s -webkit-filter;
-  -webkit-filter: sepia();
-  filter: sepia(); }
+  -webkit-filter: sepia(1);
+  filter: sepia(1); }
   .project-image:hover {
     -webkit-filter: none;
     filter: none; }
@@ -75,8 +77,6 @@ section.page {
   color: white;
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
   display: none; }
   #project-modal .project-modal-header {
     width: 100%;
@@ -114,9 +114,9 @@ section.page {
       font-size: 1.1em;
       flex: auto;
       display: flex;
-      flex-flow: column nowrap;
       align-items: center;
-      justify-content: center; }
+      justify-content: center;
+      flex-flow: column nowrap; }
       #project-modal .project-modal-body .project-modal-content div {
         width: 100%;
         display: flex;
@@ -131,6 +131,35 @@ section.page {
             transition: 1s; }
             #project-modal .project-modal-body .project-modal-content div p a:hover {
               text-shadow: 0 0 0.1em, 0 0 0.5em; }
+
+@supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
+  .modal {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px); } }
+
+@supports (not (backdrop-filter: blur(15px))) and (background: -moz-element(#body)) {
+  .modal::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: -moz-element(#body) fixed !important;
+    -webkit-filter: blur(15px);
+    filter: blur(15px); } }
+
+@supports (not (-webkit-backdrop-filter: blur(15px))) and (not (background: -moz-element(#body))) {
+  main.dim {
+    background: rgba(0, 0, 0, 0.7); }
+  .modal {
+    color: black !important;
+    background: white !important; }
+    .modal a {
+      color: black !important; }
+      .modal a:hover {
+        text-shadow: 0 0 .2em silver, 0 0 .5em silver !important; } }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .navbar {

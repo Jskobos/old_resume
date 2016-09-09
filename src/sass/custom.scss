@@ -11,12 +11,19 @@ $modalHeight: 540px;
 
 
 
-//----- Extends
+//----- Extends and Mixins
 %clearfix:after {
     display:block;
     clear:both;
     content:'';
 }
+
+@mixin flex-center($justify) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify;
+}
+
 
 html,
 body {
@@ -25,14 +32,15 @@ body {
   margin: 0;
 }
 
+main {
+  transition: 0.5s;
+}
 
 .navbar {
   @extend %clearfix;
   width: 100%;
   height: $navbarHeight;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-center(space-between);
   & .name {
     flex: 1;
     font-size: 2em;
@@ -65,10 +73,7 @@ section.page {
 }
 
 #projects {
-  background: rgba(150,150,150,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center(center);
   & figcaption {
     text-align: center;
     font-size: 1.3em;
@@ -83,8 +88,8 @@ section.page {
   box-shadow: 0 0 5px black;
   margin: 2em;
   transition: 1s filter, 1s -webkit-filter;
-	-webkit-filter: sepia();
-	filter: sepia();
+	-webkit-filter: sepia(1);
+	filter: sepia(1);
   &:hover {
     -webkit-filter: none;
     filter: none;
@@ -104,9 +109,7 @@ section.page {
     width: 100%;
     height: 15%;
     font-size: 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center(center);
     & h3 {
       width: 90%;
       text-align: center;
@@ -121,9 +124,7 @@ section.page {
   & .project-modal-body {
     height: 70%;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center(center);
     & .modal-image-box {
       height: 100%;
       flex: 0 0 calc(#{$modalWidth} / 2);
@@ -143,15 +144,11 @@ section.page {
       padding: 0 1.5em;
       font-size: 1.1em;
       flex: auto;
-      display: flex;
+      @include flex-center(center);
       flex-flow: column nowrap;
-      align-items: center;
-      justify-content: center;
       & div {
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
+        @include flex-center(space-around);
         & p {
           padding: 5%;
           text-align: center;
@@ -166,6 +163,42 @@ section.page {
         }
       }
     }
+  }
+}
+
+@supports ( (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) ) {
+  .modal {
+    -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+  }
+
+}
+
+@supports ( not (backdrop-filter: blur(15px)) ) and (background: -moz-element(#body)) {
+  .modal::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: -moz-element(#body) fixed !important;
+    -webkit-filter: blur(15px);
+    filter: blur(15px);
+  }
+}
+
+@supports ( not (-webkit-backdrop-filter: blur(15px)) ) and ( not (background: -moz-element(#body)) ) {
+  main.dim {
+    background: rgba(0,0,0,0.7);
+  }
+  .modal {
+      color: black !important;
+      background: white !important;
+      & a {
+        color: black !important;
+        &:hover {
+          text-shadow: 0 0 .2em silver, 0 0 .5em silver !important;
+        }
+      }
   }
 }
 

@@ -96,7 +96,10 @@ var MainView = function () {
         figure.addEventListener('click', function (e) {
           e.defaultPrevented;
           _this.renderModalText(p);
-          $('#project-modal').fadeIn();
+          $('#project-modal').removeClass('animated slideOutUp slideInDown');
+          $('#project-modal').addClass('animated slideInDown');
+          $('#project-modal').show();
+          $('main').addClass('dim');
           e.stopPropagation();
         });
         figure.appendChild(img);
@@ -124,25 +127,40 @@ var MainView = function () {
   }, {
     key: 'renderModalText',
     value: function renderModalText(project) {
-      $('.project-description').text(project.description);
-      $('.live-link a').attr('href', project.liveUrl);
+      if (project.liveUrl !== null) {
+        $('.live-link').show();
+        $('.live-link a').attr('href', project.liveUrl);
+      } else {
+        $('.live-link').hide();
+      }
       $('.source-link a').attr('href', project.sourceUrl);
-      $('.project-modal-header h3').text(project.name);
+      $('.project-modal-header h3').text(project.name + ' (' + project.year + ')');
       $('.modal-image').attr('src', project.imageUrl);
+      $('.project-description').text(project.description);
     }
   }, {
     key: 'setModal',
     value: function setModal() {
+      var _this2 = this;
+
       $('.ion-close').click(function (event) {
-        $('#project-modal').fadeOut();
+        _this2.hideModal();
       });
       $(document).click(function (event) {
         if (!$(event.target).closest('#project-modal').length) {
           if ($('#project-modal').is(":visible")) {
-            $('#project-modal').fadeOut();
+            _this2.hideModal();
           }
         }
       });
+    }
+  }, {
+    key: 'hideModal',
+    value: function hideModal() {
+      var $modal = $('#project-modal');
+      $modal.removeClass('animated slideInDown slideOutUp');
+      $modal.addClass('animated slideOutUp');
+      $('main').removeClass('dim');
     }
   }]);
 
@@ -178,6 +196,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var projects = [{
   name: 'Frogger',
+  year: 2016,
   hover: "Clone of classic arcade game, project from Udacity Javascript course.",
   imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/frogger_landscape.png",
   link: "http://www.github.com/Jskobos",
@@ -185,21 +204,23 @@ var projects = [{
   sourceUrl: "https://github.com/Jskobos/frontend-nanodegree-arcade-game",
   description: "This is a recommended project from the Udacity Frontend Engineer Nanodegree program. The game engine is provided by Udacity, and implementation is left to the students. I added scoring and gem rewards in addition to the basic game requirements."
 }, {
-  name: 'Inventory Tracker',
+  name: 'School Reservation Tracker',
+  year: 2015,
   hover: "Simple to-do application used at my old ESL school in Shanghai.",
   imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/inventory.png",
   link: "http://www.github.com/Jskobos",
   liveUrl: "https://shanghaipads.herokuapp.com",
   sourceUrl: "https://github.com/Jskobos/shanghai10",
-  description: "To-do app I made for my old ESL school in Shanghai. Angular.js app with Firebase for backend storage. The only one of my solo projects to have had a small number of regular users over more than a year."
+  description: "Computer reservation app I made for my old ESL school in Shanghai. Angular.js app with Firebase for backend storage. The only one of my solo projects with a small number of regular users. Sign into a test account with 'test@email.com' and 'password' to try it out."
 }, {
-  name: 'Future Project',
-  hover: "Something brilliant and creative.",
+  name: 'Authentication API',
+  year: 2015,
+  hover: "Rails API",
   imageUrl: "http://www.placekitten.com/250/250",
   link: "http://www.github.com/Jskobos",
-  liveUrl: "#",
-  sourceUrl: "#",
-  description: "Something brilliant and creative."
+  liveUrl: null,
+  sourceUrl: "https://github.com/Jskobos/shpads-api",
+  description: "Rails API, used to replace the Firebase authentication system in my reservation tracking app when the requirements got too complicated."
 }];
 
 exports.projects = projects;

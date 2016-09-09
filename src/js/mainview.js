@@ -19,7 +19,10 @@ class MainView {
       figure.addEventListener('click', (e) => {
         e.defaultPrevented;
         this.renderModalText(p);
-        $('#project-modal').fadeIn();
+        $('#project-modal').removeClass('animated slideOutUp slideInDown');
+        $('#project-modal').addClass('animated slideInDown');
+        $('#project-modal').show();
+        $('main').addClass('dim');
         e.stopPropagation();
       });
       figure.appendChild(img);
@@ -45,24 +48,37 @@ class MainView {
   }
 
   renderModalText(project) {
-    $('.project-description').text(project.description);
-    $('.live-link a').attr('href', project.liveUrl);
+    if (project.liveUrl !== null) {
+      $('.live-link').show();
+      $('.live-link a').attr('href', project.liveUrl);
+    }
+    else {
+      $('.live-link').hide();
+    }
     $('.source-link a').attr('href', project.sourceUrl);
-    $('.project-modal-header h3').text(project.name);
+    $('.project-modal-header h3').text(`${project.name} (${project.year})`);
     $('.modal-image').attr('src', project.imageUrl);
+    $('.project-description').text(project.description);
   }
 
   setModal() {
-    $('.ion-close').click(function(event) {
-      $('#project-modal').fadeOut();
+    $('.ion-close').click((event) => {
+      this.hideModal();
     });
-    $(document).click(function(event) {
+    $(document).click((event) => {
     if(!$(event.target).closest('#project-modal').length) {
         if($('#project-modal').is(":visible")) {
-            $('#project-modal').fadeOut();
+          this.hideModal();
         }
       }
     })
+  }
+
+  hideModal() {
+    let $modal = $('#project-modal');
+    $modal.removeClass('animated slideInDown slideOutUp');
+    $modal.addClass('animated slideOutUp');
+    $('main').removeClass('dim');
   }
 }
 
