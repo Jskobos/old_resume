@@ -36,6 +36,15 @@ main {
   transition: 0.5s;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: 1s;
+  &:hover {
+    text-shadow: 0 0 .2em, 0 0 .5em;
+  }
+}
+
 .navbar {
   @extend %clearfix;
   width: 100%;
@@ -52,9 +61,6 @@ main {
     margin-right: 5em;
     & a {
       padding-right: 1em;
-      text-decoration: none;
-      color: inherit;
-      transition: 1s;
       &:hover {
         text-shadow: 0 0 .2em silver, 0 0 .5em silver;
       }
@@ -70,7 +76,16 @@ section.page {
 .banner {
   height: calc(100vh - #{$navbarHeight});
   width: 100%;
+  @include flex-center(center);
   background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); //https://flic.kr/p/rMPmFF
+}
+
+.banner-textbox {
+  height: 75%;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px) !important;
 }
 
 #projects {
@@ -101,6 +116,7 @@ section.page {
   width: 100vw;
   height: 25vh;
   background: black;
+  color: white;
 }
 
 #project-modal {
@@ -168,7 +184,7 @@ section.page {
 }
 
 @supports ( (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) ) {
-  .modal {
+  .background-blur {
     -webkit-backdrop-filter: blur(15px);
             backdrop-filter: blur(15px);
   }
@@ -176,7 +192,7 @@ section.page {
 }
 
 @supports ( not (backdrop-filter: blur(15px)) ) and (background: -moz-element(#body)) {
-  .modal::before {
+  .background-blur::before {
     content: '';
     position: absolute;
     z-index: -1;
@@ -191,7 +207,7 @@ section.page {
   main.dim {
     background: rgba(0,0,0,0.7);
   }
-  .modal {
+  .background-blur {
       color: black !important;
       background: white !important;
       & a {

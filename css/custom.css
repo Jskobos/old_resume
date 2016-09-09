@@ -12,6 +12,13 @@ body {
 main {
   transition: 0.5s; }
 
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: 1s; }
+  a:hover {
+    text-shadow: 0 0 .2em, 0 0 .5em; }
+
 .navbar {
   width: 100%;
   height: 6em;
@@ -27,10 +34,7 @@ main {
     font-size: 1em;
     margin-right: 5em; }
     .navbar span.menu a {
-      padding-right: 1em;
-      text-decoration: none;
-      color: inherit;
-      transition: 1s; }
+      padding-right: 1em; }
       .navbar span.menu a:hover {
         text-shadow: 0 0 .2em silver, 0 0 .5em silver; }
 
@@ -41,7 +45,17 @@ section.page {
 .banner {
   height: calc(100vh - 6em);
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); }
+
+.banner-textbox {
+  height: 75%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px) !important; }
 
 #projects {
   display: flex;
@@ -67,7 +81,8 @@ section.page {
 .footer {
   width: 100vw;
   height: 25vh;
-  background: black; }
+  background: black;
+  color: white; }
 
 #project-modal {
   position: fixed;
@@ -134,12 +149,12 @@ section.page {
               text-shadow: 0 0 0.1em, 0 0 0.5em; }
 
 @supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
-  .modal {
+  .background-blur {
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px); } }
 
 @supports (not (backdrop-filter: blur(15px))) and (background: -moz-element(#body)) {
-  .modal::before {
+  .background-blur::before {
     content: '';
     position: absolute;
     z-index: -1;
@@ -154,12 +169,12 @@ section.page {
 @supports (not (-webkit-backdrop-filter: blur(15px))) and (not (background: -moz-element(#body))) {
   main.dim {
     background: rgba(0, 0, 0, 0.7); }
-  .modal {
+  .background-blur {
     color: black !important;
     background: white !important; }
-    .modal a {
+    .background-blur a {
       color: black !important; }
-      .modal a:hover {
+      .background-blur a:hover {
         text-shadow: 0 0 .2em silver, 0 0 .5em silver !important; } }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
