@@ -3,6 +3,7 @@ class MainView {
     this.controller = controller;
     this.currentProject = '';
     this.setScrollingLinks();
+    this.setTransforms();
     this.setModal();
   }
 
@@ -22,7 +23,7 @@ class MainView {
         $('#project-modal').removeClass('animated slideOutUp slideInDown');
         $('#project-modal').addClass('animated slideInDown');
         $('#project-modal').show();
-        $('main').addClass('dim');
+        $('main').addClass('modal-dim');
         e.stopPropagation();
       });
       figure.appendChild(img);
@@ -70,6 +71,10 @@ class MainView {
         if($('#project-modal').is(":visible")) {
           this.hideModal();
         }
+        else if ($('.banner-footer').hasClass("grow")) {
+          $('.banner-footer').removeClass('grow');
+          $('main').removeClass('dim');
+        }
       }
     })
   }
@@ -78,7 +83,16 @@ class MainView {
     let $modal = $('#project-modal');
     $modal.removeClass('animated slideInDown slideOutUp');
     $modal.addClass('animated slideOutUp');
-    $('main').removeClass('dim');
+    $('main').removeClass('modal-dim');
+  }
+
+  setTransforms() {
+    $('#contact-link').click((e) => {
+      e.defaultPrevented;
+      $('.banner-footer').addClass('grow');
+      $('main').addClass('dim');
+      e.stopPropagation();
+    });
   }
 }
 

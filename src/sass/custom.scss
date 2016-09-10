@@ -1,9 +1,12 @@
 @import 'modal';
 
 
-//----- Constants
+//----- Constants and Colors
 
-$borderColor: #b3afa4;
+$borderColor:         #b3afa4;
+$mainText:            black;
+$darkBackgroundText:  white;
+
 $navbarHeight: 6em;
 $bannerHeight: calc(100vh - 6em );
 $modalWidth: 925px;
@@ -27,13 +30,30 @@ $modalHeight: 540px;
 
 html,
 body {
+  font-family: 'Lato', sans-serif;
   box-sizing: border-box;
   width: 100%;
   margin: 0;
+  color: $mainText;
 }
 
 main {
-  transition: 0.5s;
+  transition: all 1s;
+  &.modal-dim {
+    background: rgba(0,0,0,0.8);
+  }
+  &.dim {
+    transition: 1s;
+  }
+  &.dim::before {
+    background: rgba(0,0,0,0.8);
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 a {
@@ -43,6 +63,11 @@ a {
   &:hover {
     text-shadow: 0 0 .2em, 0 0 .5em;
   }
+}
+
+
+h1, h2, h3 {
+
 }
 
 .navbar {
@@ -61,8 +86,10 @@ a {
     margin-right: 5em;
     & a {
       padding-right: 1em;
+      color: rgba($mainText, 0.5);
       &:hover {
-        text-shadow: 0 0 .2em silver, 0 0 .5em silver;
+        color: $mainText;
+        text-shadow: none;
       }
     }
   }
@@ -81,12 +108,47 @@ section.page {
 }
 
 .banner-textbox {
+  color: $darkBackgroundText;
   height: 75%;
   width: 100%;
   background: rgba(0,0,0,0.7);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h1,h2,p {
+    padding-left: 5%;
+  }
+  .banner-head {
+  }
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  p {
+    font-size: 1.2em;
+  }
+  .banner-footer {
+    @include flex-center(center);
+    height: 75px;
+    transition: all 1s ease-in-out;
+  }
+  .grow {
+    opacity: 1.0;
+    padding: none;
+    transform: translateY(-250%) scale(3);
+   }
+  a {
+    font-size: 1.5em;
+    padding: 0 12px;
+  }
 }
+
+
+
 
 #projects {
   @include flex-center(center);
@@ -116,7 +178,7 @@ section.page {
   width: 100vw;
   height: 25vh;
   background: black;
-  color: white;
+  color: $darkBackgroundText;
 }
 
 #project-modal {
@@ -169,14 +231,6 @@ section.page {
         & p {
           padding: 5%;
           text-align: center;
-          & a {
-            text-decoration: none;
-            color: white;
-            transition: 1s;
-            &:hover {
-              text-shadow: 0 0 0.1em, 0 0 0.5em;
-            }
-          }
         }
       }
     }
@@ -204,9 +258,6 @@ section.page {
 }
 
 @supports ( not (-webkit-backdrop-filter: blur(15px)) ) and ( not (background: -moz-element(#body)) ) {
-  main.dim {
-    background: rgba(0,0,0,0.7);
-  }
   .background-blur {
       color: black !important;
       background: white !important;

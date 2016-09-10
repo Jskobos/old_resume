@@ -5,12 +5,26 @@
 
 html,
 body {
+  font-family: 'Lato', sans-serif;
   box-sizing: border-box;
   width: 100%;
-  margin: 0; }
+  margin: 0;
+  color: black; }
 
 main {
-  transition: 0.5s; }
+  transition: all 1s; }
+  main.modal-dim {
+    background: rgba(0, 0, 0, 0.8); }
+  main.dim {
+    transition: 1s; }
+  main.dim::before {
+    background: rgba(0, 0, 0, 0.8);
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
 
 a {
   color: inherit;
@@ -34,9 +48,11 @@ a {
     font-size: 1em;
     margin-right: 5em; }
     .navbar span.menu a {
-      padding-right: 1em; }
+      padding-right: 1em;
+      color: rgba(0, 0, 0, 0.5); }
       .navbar span.menu a:hover {
-        text-shadow: 0 0 .2em silver, 0 0 .5em silver; }
+        color: black;
+        text-shadow: none; }
 
 section.page {
   height: 100vh;
@@ -51,11 +67,36 @@ section.page {
   background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); }
 
 .banner-textbox {
+  color: white;
   height: 75%;
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px) !important; }
+  backdrop-filter: blur(2px) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .banner-textbox h1, .banner-textbox h2, .banner-textbox p {
+    padding-left: 5%; }
+  .banner-textbox h1 {
+    font-size: 2em; }
+  .banner-textbox h2 {
+    font-size: 1.5em; }
+  .banner-textbox p {
+    font-size: 1.2em; }
+  .banner-textbox .banner-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    transition: all 1s ease-in-out; }
+  .banner-textbox .grow {
+    opacity: 1.0;
+    padding: none;
+    transform: translateY(-250%) scale(3); }
+  .banner-textbox a {
+    font-size: 1.5em;
+    padding: 0 12px; }
 
 #projects {
   display: flex;
@@ -141,12 +182,6 @@ section.page {
         #project-modal .project-modal-body .project-modal-content div p {
           padding: 5%;
           text-align: center; }
-          #project-modal .project-modal-body .project-modal-content div p a {
-            text-decoration: none;
-            color: white;
-            transition: 1s; }
-            #project-modal .project-modal-body .project-modal-content div p a:hover {
-              text-shadow: 0 0 0.1em, 0 0 0.5em; }
 
 @supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
   .background-blur {
@@ -167,8 +202,6 @@ section.page {
     filter: blur(15px); } }
 
 @supports (not (-webkit-backdrop-filter: blur(15px))) and (not (background: -moz-element(#body))) {
-  main.dim {
-    background: rgba(0, 0, 0, 0.7); }
   .background-blur {
     color: black !important;
     background: white !important; }

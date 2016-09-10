@@ -74,6 +74,7 @@ var MainView = function () {
     this.controller = controller;
     this.currentProject = '';
     this.setScrollingLinks();
+    this.setTransforms();
     this.setModal();
   }
 
@@ -99,7 +100,7 @@ var MainView = function () {
           $('#project-modal').removeClass('animated slideOutUp slideInDown');
           $('#project-modal').addClass('animated slideInDown');
           $('#project-modal').show();
-          $('main').addClass('dim');
+          $('main').addClass('modal-dim');
           e.stopPropagation();
         });
         figure.appendChild(img);
@@ -150,6 +151,9 @@ var MainView = function () {
         if (!$(event.target).closest('#project-modal').length) {
           if ($('#project-modal').is(":visible")) {
             _this2.hideModal();
+          } else if ($('.banner-footer').hasClass("grow")) {
+            $('.banner-footer').removeClass('grow');
+            $('main').removeClass('dim');
           }
         }
       });
@@ -160,7 +164,17 @@ var MainView = function () {
       var $modal = $('#project-modal');
       $modal.removeClass('animated slideInDown slideOutUp');
       $modal.addClass('animated slideOutUp');
-      $('main').removeClass('dim');
+      $('main').removeClass('modal-dim');
+    }
+  }, {
+    key: 'setTransforms',
+    value: function setTransforms() {
+      $('#contact-link').click(function (e) {
+        e.defaultPrevented;
+        $('.banner-footer').addClass('grow');
+        $('main').addClass('dim');
+        e.stopPropagation();
+      });
     }
   }]);
 
