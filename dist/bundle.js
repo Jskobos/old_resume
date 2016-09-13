@@ -15,6 +15,10 @@ var _mainview = require('./mainview');
 
 var _mainview2 = _interopRequireDefault(_mainview);
 
+var _textview = require('./textview');
+
+var _textview2 = _interopRequireDefault(_textview);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25,18 +29,37 @@ var MainController = function () {
 
     this.model = new _model2.default();
     this.view = new _mainview2.default(this);
+    this.textView = new _textview2.default(this);
     this.view.render();
+    this.textView.render();
   }
 
   _createClass(MainController, [{
     key: 'render',
     value: function render() {
       this.view.render();
+      this.textView.render();
     }
   }, {
     key: 'getProjects',
     value: function getProjects() {
       return this.model.projects;
+    }
+  }, {
+    key: 'getText',
+    value: function getText() {
+      return this.model.getText();
+    }
+  }, {
+    key: 'getLanguage',
+    value: function getLanguage() {
+      return this.model.language;
+    }
+  }, {
+    key: 'changeLanguage',
+    value: function changeLanguage(lang) {
+      this.model.changeLanguage(lang);
+      this.render();
     }
   }]);
 
@@ -45,7 +68,7 @@ var MainController = function () {
 
 exports.default = MainController;
 
-},{"./mainview":3,"./model":4}],2:[function(require,module,exports){
+},{"./mainview":3,"./model":4,"./textview":7}],2:[function(require,module,exports){
 "use strict";
 
 var _MainController = require("./MainController");
@@ -72,10 +95,12 @@ var MainView = function () {
     _classCallCheck(this, MainView);
 
     this.controller = controller;
+    this.languageToggle = { 'CN': 'EN', 'EN': 'CN' };
     this.currentProject = '';
     this.setScrollingLinks();
     this.setTransforms();
     this.setModal();
+    this.setLanguageSwitch();
   }
 
   _createClass(MainView, [{
@@ -84,11 +109,14 @@ var MainView = function () {
       var _this = this;
 
       var projects = this.controller.getProjects(),
-          container = $('#projects'),
+          container = $('#projects .project-box'),
+          language = this.controller.getLanguage(),
           figure = void 0,
           img = void 0,
-          caption = void 0;
+          caption = void 0,
+          text = void 0;
       projects.forEach(function (p) {
+        text = p[language];
         figure = document.createElement('figure');
         caption = document.createElement('figcaption');
         img = new Image();
@@ -105,7 +133,7 @@ var MainView = function () {
         });
         figure.appendChild(img);
         figure.appendChild(caption);
-        caption.innerHTML = p.name;
+        caption.innerHTML = text.name;
         container.append(figure);
       });
     }
@@ -128,6 +156,8 @@ var MainView = function () {
   }, {
     key: 'renderModalText',
     value: function renderModalText(project) {
+      var language = this.controller.getLanguage();
+      var modalText = project[language];
       if (project.liveUrl !== null) {
         $('.live-link').show();
         $('.live-link a').attr('href', project.liveUrl);
@@ -135,9 +165,9 @@ var MainView = function () {
         $('.live-link').hide();
       }
       $('.source-link a').attr('href', project.sourceUrl);
-      $('.project-modal-header h3').text(project.name + ' (' + project.year + ')');
+      $('.project-modal-header h3').text(modalText.name + ' (' + project.year + ')');
       $('.modal-image').attr('src', project.imageUrl);
-      $('.project-description').text(project.description);
+      $('.project-description').text(modalText.description);
     }
   }, {
     key: 'setModal',
@@ -149,7 +179,7 @@ var MainView = function () {
       });
       $(document).click(function (event) {
         if (!$(event.target).closest('#project-modal').length) {
-          if ($('#project-modal').is(":visible")) {
+          if ($('main').hasClass("modal-dim")) {
             _this2.hideModal();
           } else if ($('.banner-footer').hasClass("grow")) {
             $('.banner-footer').removeClass('grow');
@@ -176,6 +206,18 @@ var MainView = function () {
         e.stopPropagation();
       });
     }
+  }, {
+    key: 'setLanguageSwitch',
+    value: function setLanguageSwitch() {
+      var _this3 = this;
+
+      $('#language').click(function (e) {
+        e.defaultPrevented;
+        var language = $('#language').attr('data-language');
+        var newLanguage = _this3.languageToggle[language];
+        _this3.controller.changeLanguage(newLanguage);
+      });
+    }
   }]);
 
   return MainView;
@@ -190,53 +232,202 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _projects = require('./projects');
+
+var _pagetext = require('./pagetext');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Model = function Model() {
-  _classCallCheck(this, Model);
+var Model = function () {
+  function Model() {
+    _classCallCheck(this, Model);
 
-  this.projects = _projects.projects;
-};
+    this.projects = _projects.projects;
+    this.language = 'EN';
+    this.text = _pagetext.text;
+  }
+
+  _createClass(Model, [{
+    key: 'changeLanguage',
+    value: function changeLanguage(lang) {
+      this.language = lang;
+    }
+  }, {
+    key: 'getText',
+    value: function getText() {
+      return this.text[this.language];
+    }
+  }]);
+
+  return Model;
+}();
 
 exports.default = Model;
 
-},{"./projects":5}],5:[function(require,module,exports){
-"use strict";
+},{"./pagetext":5,"./projects":6}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var text = {
+
+  'EN': {
+    code: 'EN',
+    portfolio: 'Portfolio',
+    contact: 'Contact',
+    language: '中文',
+    bannerHead: 'Front-End Developer',
+    bannerSubhead: 'Shanghai',
+    bio: '',
+    linkHover: ['Github', 'StackOverflow', 'LinkedIn', 'Email', 'Facebook', 'Instagram'],
+    footerCredits: 'Photo Credits (Creative Commons License): <a href="www.flickr.com/photos/sama093/">www.flickr.com/photos/sama093/</a>',
+    footerCopyright: '',
+    projectHover: 'View live site',
+    sourceHover: 'View source'
+  },
+
+  'CN': {
+    code: 'CN',
+    portfolio: '我的项目',
+    contact: '联系',
+    language: 'English',
+    bannerHead: 'Front-End Developer',
+    bannerSubhead: '上海',
+    bio: '',
+    linkHover: ['Github', 'StackOverflow', 'LinkedIn', '电子邮件', '脸书', 'Instagram'],
+    footerCredits: 'Photo Credits (Creative Commons License): <a href="www.flickr.com/photos/sama093/">www.flickr.com/photos/sama093/</a>',
+    footerCopyright: '',
+    projectHover: '看网站',
+    sourceHover: '看源代码'
+  }
+
+};
+
+exports.text = text;
+
+},{}],6:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var projects = [{
-  name: 'Frogger',
   year: 2016,
-  hover: "Clone of classic arcade game, project from Udacity Javascript course.",
-  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/frogger_landscape.png",
-  link: "http://www.github.com/Jskobos",
-  liveUrl: "#",
-  sourceUrl: "https://github.com/Jskobos/frontend-nanodegree-arcade-game",
-  description: "This is a recommended project from the Udacity Frontend Engineer Nanodegree program. The game engine is provided by Udacity, and implementation is left to the students. I added scoring and gem rewards in addition to the basic game requirements."
+  imageUrl: 'https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/frogger_landscape.png',
+  liveUrl: '#',
+  sourceUrl: 'https://github.com/Jskobos/frontend-nanodegree-arcade-game',
+  EN: {
+    name: 'Frogger',
+    hover: 'Project from Udacity Javascript course.',
+    description: 'This is a recommended project from the Udacity Frontend Engineer Nanodegree program. The game engine is provided by Udacity, and implementation is left to the students. I added scoring and gem rewards in addition to the basic game requirements.'
+  },
+  CN: {
+    name: 'Frogger',
+    hover: 'Project from Udacity Javascript course.',
+    description: '中国中文'
+  }
 }, {
-  name: 'School Reservation Tracker',
   year: 2015,
-  hover: "Simple to-do application used at my old ESL school in Shanghai.",
   imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/inventory.png",
-  link: "http://www.github.com/Jskobos",
   liveUrl: "https://shanghaipads.herokuapp.com",
   sourceUrl: "https://github.com/Jskobos/shanghai10",
-  description: "Computer reservation app I made for my old ESL school in Shanghai. Angular.js app with Firebase for backend storage. The only one of my solo projects with a small number of regular users. Sign into a test account with 'test@email.com' and 'password' to try it out."
+  EN: {
+    name: 'Reservation Tracker',
+    hover: 'Simple reservation app used at my old ESL school in Shanghai.',
+    description: 'Computer reservation app I made for my old ESL school in Shanghai. Angular.js app with Firebase for backend storage. The only one of my solo projects with a small number of regular users. Sign into a test account with "test@email.com" and "password" to try it out.'
+  },
+  CN: {
+    name: 'Reservation Tracker',
+    hover: '存货预约管理系统',
+    description: '中国中文'
+  }
 }, {
-  name: 'Authentication API',
   year: 2015,
-  hover: "Rails API",
   imageUrl: "http://www.placekitten.com/250/250",
-  link: "http://www.github.com/Jskobos",
   liveUrl: null,
   sourceUrl: "https://github.com/Jskobos/shpads-api",
-  description: "Rails API, used to replace the Firebase authentication system in my reservation tracking app when the requirements got too complicated."
+  EN: {
+    name: 'Authentication API',
+    hover: 'Rails API.',
+    description: 'Rails API, used to replace the Firebase authentication system in my reservation tracking app when the requirements got too complicated.'
+  },
+  CN: {
+    name: 'Authentication API',
+    hover: 'Rails API.',
+    description: '中国中文'
+  }
+}, {
+  year: 2016,
+  imageUrl: "http://www.placekitten.com/250/250",
+  liveUrl: "#",
+  sourceUrl: "https://github.com/Jskobos/portfolio",
+  EN: {
+    name: 'Portfolio',
+    hover: 'Source code for this website.',
+    description: 'Interactive personal homepage/portfolio. Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
+  },
+  CN: {
+    name: 'Portfolio',
+    hover: '本次网站的源码.',
+    description: '本次网站的源码'
+  }
 }];
 
 exports.projects = projects;
+
+},{}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TextView = function () {
+  function TextView(controller) {
+    _classCallCheck(this, TextView);
+
+    this.controller = controller;
+    this.portfolio = $('#portfolio-link');
+    this.contact = $('#contact-link');
+    this.language = $('#language');
+    this.heading = $('#banner-textbox h1');
+    this.subheading = $('#banner-textbox h2');
+    this.bodyText = $('banner-body');
+    this.bannerLinks = $('.banner-footer').children('a');
+    this.modalSiteLink = $('.live-link a');
+    this.modalSiteSource = $('.source-link a');
+    this.footerCopyright = $('#copyright');
+    this.footerCredits = $('#credits');
+  }
+
+  _createClass(TextView, [{
+    key: 'render',
+    value: function render() {
+      var text = this.controller.getText();
+      this.portfolio.text(text.portfolio);
+      this.contact.text(text.contact);
+      this.language.text(text.language);
+      this.language.attr('data-language', text.code);
+      this.heading.text(text.bannerHead);
+      this.subheading.text(text.bannerSubhead);
+      this.bodyText.text(text.bio);
+      this.modalSiteLink.text(text.projectHover);
+      this.modalSiteSource.text(text.sourceHover);
+      this.footerCredits.html(text.footerCredits);
+      this.footerCopyright.text(text.footerCopyright);
+    }
+  }]);
+
+  return TextView;
+}();
+
+exports.default = TextView;
 
 },{}]},{},[2]);

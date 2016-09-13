@@ -3,6 +3,14 @@
   clear: both;
   content: ''; }
 
+.banner-textbox, #projects .project-box {
+  color: white;
+  height: 75%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px) !important; }
+
 html,
 body {
   font-family: 'Lato', sans-serif;
@@ -44,6 +52,8 @@ a {
     font-size: 2em;
     padding-left: 5%;
     float: left; }
+    .navbar .name a:hover {
+      text-shadow: none; }
   .navbar span.menu {
     font-size: 1em;
     margin-right: 5em; }
@@ -63,16 +73,12 @@ section.page {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; }
+
+#main-page-banner {
   background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); }
 
 .banner-textbox {
-  color: white;
-  height: 75%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px) !important;
   display: flex;
   flex-direction: column;
   justify-content: space-between; }
@@ -105,6 +111,12 @@ section.page {
   #projects figcaption {
     text-align: center;
     font-size: 1.3em; }
+  #projects .banner {
+    background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/hangzhou_panorama.jpg"); }
+  #projects .project-box {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 .project-image {
   height: 125px;
@@ -113,8 +125,8 @@ section.page {
   box-shadow: 0 0 5px black;
   margin: 2em;
   transition: 1s filter, 1s -webkit-filter;
-  -webkit-filter: sepia(1);
-  filter: sepia(1); }
+  -webkit-filter: grayscale(80);
+  filter: grayscale(80); }
   .project-image:hover {
     -webkit-filter: none;
     filter: none; }

@@ -1,17 +1,21 @@
 class MainView {
   constructor(controller) {
     this.controller = controller;
+    this.languageToggle = {'CN':'EN','EN':'CN'};
     this.currentProject = '';
     this.setScrollingLinks();
     this.setTransforms();
     this.setModal();
+    this.setLanguageSwitch();
   }
 
   render() {
     let projects    = this.controller.getProjects(),
-        container   = $('#projects'),
-        figure, img, caption;
+        container   = $('#projects .project-box'),
+        language    = this.controller.getLanguage(),
+        figure, img, caption, text;
     projects.forEach((p) => {
+      text = p[language];
       figure = document.createElement('figure');
       caption = document.createElement('figcaption');
       img = new Image();
@@ -28,7 +32,7 @@ class MainView {
       });
       figure.appendChild(img);
       figure.appendChild(caption);
-      caption.innerHTML = p.name;
+      caption.innerHTML = text.name;
       container.append(figure);
     });
   }
@@ -49,6 +53,8 @@ class MainView {
   }
 
   renderModalText(project) {
+    let language = this.controller.getLanguage();
+    let modalText = project[language];
     if (project.liveUrl !== null) {
       $('.live-link').show();
       $('.live-link a').attr('href', project.liveUrl);
@@ -57,9 +63,9 @@ class MainView {
       $('.live-link').hide();
     }
     $('.source-link a').attr('href', project.sourceUrl);
-    $('.project-modal-header h3').text(`${project.name} (${project.year})`);
+    $('.project-modal-header h3').text(`${modalText.name} (${project.year})`);
     $('.modal-image').attr('src', project.imageUrl);
-    $('.project-description').text(project.description);
+    $('.project-description').text(modalText.description);
   }
 
   setModal() {
@@ -68,7 +74,7 @@ class MainView {
     });
     $(document).click((event) => {
     if(!$(event.target).closest('#project-modal').length) {
-        if($('#project-modal').is(":visible")) {
+        if($('main').hasClass("modal-dim")) {
           this.hideModal();
         }
         else if ($('.banner-footer').hasClass("grow")) {
@@ -92,6 +98,15 @@ class MainView {
       $('.banner-footer').addClass('grow');
       $('main').addClass('dim');
       e.stopPropagation();
+    });
+  }
+
+  setLanguageSwitch() {
+    $('#language').click((e) => {
+      e.defaultPrevented;
+      let language = $('#language').attr('data-language');
+      let newLanguage = this.languageToggle[language];
+      this.controller.changeLanguage(newLanguage);
     });
   }
 }
