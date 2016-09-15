@@ -115,6 +115,7 @@ var MainView = function () {
           img = void 0,
           caption = void 0,
           text = void 0;
+      container.html('');
       projects.forEach(function (p) {
         text = p[language];
         figure = document.createElement('figure');
@@ -294,7 +295,7 @@ var text = {
     portfolio: '我的项目',
     contact: '联系',
     language: 'English',
-    bannerHead: 'Front-End Developer',
+    bannerHead: '前端开发工程师',
     bannerSubhead: '上海',
     bio: '',
     linkHover: ['Github', 'StackOverflow', 'LinkedIn', '电子邮件', '脸书', 'Instagram'],
@@ -367,7 +368,7 @@ var projects = [{
   EN: {
     name: 'Portfolio',
     hover: 'Source code for this website.',
-    description: 'Interactive personal homepage/portfolio. Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
+    description: 'Interactive personal homepage/portfolio (you\'re looking at it right now!) Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
   },
   CN: {
     name: 'Portfolio',

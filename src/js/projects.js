@@ -51,7 +51,7 @@ const projects = [{
     EN: {
       name: 'Portfolio',
       hover: 'Source code for this website.',
-      description: 'Interactive personal homepage/portfolio. Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
+      description: 'Interactive personal homepage/portfolio (you\'re looking at it right now!) Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
     },
     CN: {
       name: 'Portfolio',

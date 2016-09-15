@@ -3,7 +3,7 @@
   clear: both;
   content: ''; }
 
-.banner-textbox, #projects .project-box {
+.banner-textbox {
   color: white;
   height: 75%;
   width: 100%;
@@ -22,7 +22,7 @@ body {
 main {
   transition: all 1s; }
   main.modal-dim {
-    background: rgba(0, 0, 0, 0.8); }
+    background: rgba(0, 0, 0, 0.65); }
   main.dim {
     transition: 1s; }
   main.dim::before {
@@ -37,9 +37,7 @@ main {
 a {
   color: inherit;
   text-decoration: none;
-  transition: 1s; }
-  a:hover {
-    text-shadow: 0 0 .2em, 0 0 .5em; }
+  transition: 1s all; }
 
 .navbar {
   width: 100%;
@@ -52,8 +50,6 @@ a {
     font-size: 2em;
     padding-left: 5%;
     float: left; }
-    .navbar .name a:hover {
-      text-shadow: none; }
   .navbar span.menu {
     font-size: 1em;
     margin-right: 5em; }
@@ -61,8 +57,7 @@ a {
       padding-right: 1em;
       color: rgba(0, 0, 0, 0.5); }
       .navbar span.menu a:hover {
-        color: black;
-        text-shadow: none; }
+        color: black; }
 
 section.page {
   height: 100vh;
@@ -103,20 +98,22 @@ section.page {
   .banner-textbox a {
     font-size: 1.5em;
     padding: 0 12px; }
+    .banner-textbox a:hover {
+      text-shadow: 0 0 0.2em, 0 0 0.3em; }
 
 #projects {
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  flex-flow: column nowrap; }
   #projects figcaption {
     text-align: center;
     font-size: 1.3em; }
-  #projects .banner {
-    background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/hangzhou_panorama.jpg"); }
   #projects .project-box {
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    flex: 7; }
 
 .project-image {
   height: 125px;
@@ -125,17 +122,20 @@ section.page {
   box-shadow: 0 0 5px black;
   margin: 2em;
   transition: 1s filter, 1s -webkit-filter;
-  -webkit-filter: grayscale(80);
-  filter: grayscale(80); }
+  -webkit-filter: sepia(1);
+  filter: sepia(1); }
   .project-image:hover {
     -webkit-filter: none;
     filter: none; }
 
 .footer {
   width: 100vw;
-  height: 25vh;
-  background: black;
+  background: linear-gradient(#222, #444);
   color: white; }
+  .footer p {
+    text-align: center; }
+  .footer a:hover {
+    text-shadow: 0 0 0.5em rgba(255, 255, 255, 0.5), 0 0 0.3em rgba(255, 255, 255, 0.5); }
 
 #project-modal {
   position: fixed;
@@ -143,8 +143,8 @@ section.page {
   height: 540px;
   width: 925px;
   margin: 0 calc(50% - 925px / 2);
-  color: white;
-  background: rgba(0, 0, 0, 0.6);
+  color: black;
+  background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.6);
   display: none; }
   #project-modal .project-modal-header {
@@ -194,6 +194,8 @@ section.page {
         #project-modal .project-modal-body .project-modal-content div p {
           padding: 5%;
           text-align: center; }
+    #project-modal .project-modal-body a:hover {
+      text-shadow: 0 0 0.5em #b3b3b3; }
 
 @supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
   .background-blur {
@@ -215,12 +217,7 @@ section.page {
 
 @supports (not (-webkit-backdrop-filter: blur(15px))) and (not (background: -moz-element(#body))) {
   .background-blur {
-    color: black !important;
-    background: white !important; }
-    .background-blur a {
-      color: black !important; }
-      .background-blur a:hover {
-        text-shadow: 0 0 .2em silver, 0 0 .5em silver !important; } }
+    background: white !important; } }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .navbar {

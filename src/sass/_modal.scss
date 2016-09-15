@@ -4,7 +4,7 @@
   height: $height;
   width: $width;
   margin: 0 calc(50% - #{$width} / 2 );
-  color: white;
-  background: rgba(0,0,0,0.6);
+  color: black;
+  background: rgba(white,0.75);
   box-shadow: 0 .5em 1em rgba(0, 0, 0, 0.6);
 }

@@ -14,6 +14,7 @@ class MainView {
         container   = $('#projects .project-box'),
         language    = this.controller.getLanguage(),
         figure, img, caption, text;
+    container.html('');
     projects.forEach((p) => {
       text = p[language];
       figure = document.createElement('figure');

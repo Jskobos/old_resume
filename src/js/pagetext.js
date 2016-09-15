@@ -20,7 +20,7 @@ const text = {
     portfolio: '我的项目',
     contact:   '联系',
     language:  'English',
-    bannerHead: 'Front-End Developer',
+    bannerHead: '前端开发工程师',
     bannerSubhead: '上海',
     bio: '',
     linkHover: ['Github','StackOverflow','LinkedIn','电子邮件','脸书','Instagram'],
