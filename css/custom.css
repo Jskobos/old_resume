@@ -20,11 +20,9 @@ body {
   color: black; }
 
 main {
-  transition: all 1s; }
-  main.modal-dim {
-    background: rgba(0, 0, 0, 0.65); }
+  transition: all 0.25s; }
   main.dim {
-    transition: 1s; }
+    transition: 0.5s; }
   main.dim::before {
     background: rgba(0, 0, 0, 0.8);
     content: ' ';
@@ -105,7 +103,8 @@ section.page {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-flow: column nowrap; }
+  flex-flow: column nowrap;
+  transition: 0.5s all; }
   #projects figcaption {
     text-align: center;
     font-size: 1.3em; }
@@ -114,6 +113,15 @@ section.page {
     align-items: center;
     justify-content: center;
     flex: 7; }
+  #projects.modal-dim::before {
+    background: rgba(0, 0, 0, 0.65);
+    content: ' ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10; }
 
 .project-image {
   height: 125px;
@@ -144,9 +152,10 @@ section.page {
   width: 925px;
   margin: 0 calc(50% - 925px / 2);
   color: black;
-  background: rgba(255, 255, 255, 0.75);
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.6);
-  display: none; }
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 100; }
   #project-modal .project-modal-header {
     width: 100%;
     height: 15%;
@@ -199,7 +208,7 @@ section.page {
 
 @supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
   .background-blur {
-    -webkit-backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px) brightness(3);
     backdrop-filter: blur(15px); } }
 
 @supports (not (backdrop-filter: blur(15px))) and (background: -moz-element(#body)) {

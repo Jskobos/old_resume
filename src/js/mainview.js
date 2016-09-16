@@ -28,7 +28,7 @@ class MainView {
         $('#project-modal').removeClass('animated slideOutUp slideInDown');
         $('#project-modal').addClass('animated slideInDown');
         $('#project-modal').show();
-        $('main').addClass('modal-dim');
+        $('#projects').addClass('modal-dim');
         e.stopPropagation();
       });
       figure.appendChild(img);
@@ -75,7 +75,7 @@ class MainView {
     });
     $(document).click((event) => {
     if(!$(event.target).closest('#project-modal').length) {
-        if($('main').hasClass("modal-dim")) {
+        if($('#projects').hasClass("modal-dim")) {
           this.hideModal();
         }
         else if ($('.banner-footer').hasClass("grow")) {
@@ -90,7 +90,7 @@ class MainView {
     let $modal = $('#project-modal');
     $modal.removeClass('animated slideInDown slideOutUp');
     $modal.addClass('animated slideOutUp');
-    $('main').removeClass('modal-dim');
+    $('#projects').removeClass('modal-dim');
   }
 
   setTransforms() {

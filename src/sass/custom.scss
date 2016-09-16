@@ -49,12 +49,9 @@ body {
 }
 
 main {
-  transition: all 1s;
-  &.modal-dim {
-    background: rgba(0,0,0,0.65);
-  }
+  transition: all 0.25s;
   &.dim {
-    transition: 1s;
+    transition: 0.5s;
   }
   &.dim::before {
     background: rgba(0,0,0,0.8);
@@ -155,12 +152,10 @@ section.page {
   }
 }
 
-
-
-
 #projects {
   @include flex-center(center);
   flex-flow: column nowrap;
+  transition: 0.5s all;
   & figcaption {
     text-align: center;
     font-size: 1.3em;
@@ -168,6 +163,16 @@ section.page {
   & .project-box {
     @include flex-center(center);
     flex: 7;
+  }
+  &.modal-dim::before {
+    background: rgba(0,0,0,0.65);
+    content: ' ';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
   }
 }
 
@@ -202,6 +207,7 @@ section.page {
 #project-modal {
   @include modal($modalWidth, $modalHeight);
   display: none;
+  z-index: 100;
   & .project-modal-header {
     width: 100%;
     height: 15%;
@@ -260,7 +266,7 @@ section.page {
 
 @supports ( (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) ) {
   .background-blur {
-    -webkit-backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px) brightness(3);
             backdrop-filter: blur(15px);
   }
 

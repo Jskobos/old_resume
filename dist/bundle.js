@@ -129,7 +129,7 @@ var MainView = function () {
           $('#project-modal').removeClass('animated slideOutUp slideInDown');
           $('#project-modal').addClass('animated slideInDown');
           $('#project-modal').show();
-          $('main').addClass('modal-dim');
+          $('#projects').addClass('modal-dim');
           e.stopPropagation();
         });
         figure.appendChild(img);
@@ -180,7 +180,7 @@ var MainView = function () {
       });
       $(document).click(function (event) {
         if (!$(event.target).closest('#project-modal').length) {
-          if ($('main').hasClass("modal-dim")) {
+          if ($('#projects').hasClass("modal-dim")) {
             _this2.hideModal();
           } else if ($('.banner-footer').hasClass("grow")) {
             $('.banner-footer').removeClass('grow');
@@ -195,7 +195,7 @@ var MainView = function () {
       var $modal = $('#project-modal');
       $modal.removeClass('animated slideInDown slideOutUp');
       $modal.addClass('animated slideOutUp');
-      $('main').removeClass('modal-dim');
+      $('#projects').removeClass('modal-dim');
     }
   }, {
     key: 'setTransforms',
