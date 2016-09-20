@@ -1,302 +1,270 @@
 @import 'modal';
-
-
 //----- Constants and Colors
-
-$borderColor:         #b3afa4;
-$mainText:            black;
-$darkBackgroundText:  white;
-
+$borderColor: #b3afa4;
+$mainText: black;
+$darkBackgroundText: white;
 $navbarHeight: 6em;
 $bannerHeight: calc(100vh - 6em );
 $modalWidth: 925px;
 $modalHeight: 540px;
-
-
-
 //----- Extends and Mixins
 %clearfix:after {
-    display:block;
-    clear:both;
-    content:'';
-}
-
-%banner {
-  color: $darkBackgroundText;
-  height: 75%;
-  width: 100%;
-  background: rgba(0,0,0,0.7);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px) !important;
-}
-
-@mixin flex-center($justify) {
-  display: flex;
-  align-items: center;
-  justify-content: $justify;
-}
-
-
-
-
-html,
-body {
-  font-family: 'Lato', sans-serif;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  color: $mainText;
-}
-
-main {
-  transition: all 0.25s;
-  &.dim {
-    transition: 0.5s;
-  }
-  &.dim::before {
-    background: rgba(0,0,0,0.8);
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: 1s all;
-}
-
-
-h1, h2, h3 {
-
-}
-
-.navbar {
-  @extend %clearfix;
-  width: 100%;
-  height: $navbarHeight;
-  @include flex-center(space-between);
-  & .name {
-    flex: 1;
-    font-size: 2em;
-    padding-left: 5%;
-    float: left;
-  }
-  & span.menu {
-    font-size: 1em;
-    margin-right: 5em;
-    & a {
-      padding-right: 1em;
-      color: rgba($mainText, 0.5);
-      &:hover {
-        color: $mainText;
-      }
-    }
-  }
-}
-
-section.page {
-  height: 100vh;
-  width: 100vw;
-}
-
-.banner {
-  height: calc(100vh - #{$navbarHeight});
-  width: 100%;
-  @include flex-center(center);
-  }
-
-#main-page-banner {
-  background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg"); //https://flic.kr/p/rMPmFF
-}
-
-.banner-textbox {
-  @extend %banner;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  h1,h2,p {
-    padding-left: 5%;
-  }
-  .banner-head {
-  }
-  h1 {
-    font-size: 2em;
-  }
-  h2 {
-    font-size: 1.5em;
-  }
-  p {
-    font-size: 1.2em;
-  }
-  .banner-footer {
-    @include flex-center(center);
-    height: 75px;
-    transition: all 1s ease-in-out;
-  }
-  .grow {
-    opacity: 1.0;
-    padding: none;
-    transform: translateY(-250%) scale(3);
-   }
-  a {
-    font-size: 1.5em;
-    padding: 0 12px;
-    &:hover {
-      text-shadow: 0 0 0.2em, 0 0 0.3em;
-    }
-  }
-}
-
-#projects {
-  @include flex-center(center);
-  flex-flow: column nowrap;
-  transition: 0.5s all;
-  & figcaption {
-    text-align: center;
-    font-size: 1.3em;
-  }
-  & .project-box {
-    @include flex-center(center);
-    flex: 7;
-  }
-  &.modal-dim::before {
-    background: rgba(0,0,0,0.65);
-    content: ' ';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-  }
-}
-
-
-.project-image {
-  height: 125px;
-  width: 200px;
-  border-radius: 2% / 4%;
-  box-shadow: 0 0 5px black;
-  margin: 2em;
-  transition: 1s filter, 1s -webkit-filter;
-	-webkit-filter: sepia(1);
-	filter: sepia(1);
-  &:hover {
-    -webkit-filter: none;
-    filter: none;
-  }
-}
-
-.footer {
-  width: 100vw;
-  background: linear-gradient(#222, #444);
-  color: $darkBackgroundText;
-  & p {
-    text-align: center;
-  }
-  & a:hover {
-    text-shadow: 0 0 0.5em rgba($darkBackgroundText, 0.5), 0 0 0.3em rgba($darkBackgroundText, 0.5);
-  }
-}
-
-#project-modal {
-  @include modal($modalWidth, $modalHeight);
-  display: none;
-  z-index: 100;
-  & .project-modal-header {
-    width: 100%;
-    height: 15%;
-    font-size: 1.5em;
-    @include flex-center(center);
-    & h3 {
-      width: 90%;
-      text-align: center;
-      margin: 0;
-    }
-    & span {
-      font-size: 1em;
-    }
-  }
-
-  & .project-modal-body {
-    height: 70%;
-    width: 100%;
-    @include flex-center(center);
-    & .modal-image-box {
-      height: 100%;
-      flex: 0 0 calc(#{$modalWidth} / 2);
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: center;
-      & .modal-image {
-        width: 400px;
-        height: 233px;
-        overflow: hidden;
-      }
-
-    }
-    & .project-modal-content {
-      height: 100%;
-      padding: 0 1.5em;
-      font-size: 1.1em;
-      flex: auto;
-      @include flex-center(center);
-      flex-flow: column nowrap;
-      & div {
-        width: 100%;
-        @include flex-center(space-around);
-        & p {
-          padding: 5%;
-          text-align: center;
-        }
-      }
-    }
-
-    & a:hover {
-      text-shadow: 0 0 0.5em lighten($mainText, 70%);
-    }
-  }
-}
-
-@supports ( (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) ) {
-  .background-blur {
-    -webkit-backdrop-filter: blur(15px) brightness(3);
-            backdrop-filter: blur(15px);
-  }
-
-}
-
-@supports ( not (backdrop-filter: blur(15px)) ) and (background: -moz-element(#body)) {
-  .background-blur::before {
+    display: block;
+    clear: both;
     content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: -moz-element(#body) fixed !important;
-    -webkit-filter: blur(15px);
-    filter: blur(15px);
-  }
 }
-
+%banner {
+    color: $darkBackgroundText;
+    height: 75%;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px) !important;
+}
+@mixin flex-center($justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+}
+//---- Custom styles
+body,
+html {
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    color: $mainText;
+}
+main {
+    transition: all 0.25s;
+    &.dim {
+        transition: 0.5s;
+    }
+    &.dim::before {
+        background: rgba(0,0,0,0.8);
+        content: ' ';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: 1s all;
+}
+h1,
+h2,
+h3 {}
+.navbar {
+    @extend %clearfix;
+    width: 100%;
+    height: $navbarHeight;
+    @include flex-center(space-between);
+    & .name {
+        flex: 1;
+        font-size: 2em;
+        padding-left: 5%;
+        float: left;
+    }
+    & span.menu {
+        font-size: 1em;
+        margin-right: 5em;
+        & a {
+            padding-right: 1em;
+            color: rgba($mainText, 0.5);
+            &:hover {
+                color: $mainText;
+            }
+        }
+    }
+}
+section.page {
+    height: 100vh;
+    width: 100vw;
+}
+.banner {
+    height: calc(100vh - #{$navbarHeight});
+    width: 100%;
+    @include flex-center(center);
+}
+#main-page-banner {
+    background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg");
+}
+.banner-textbox {
+    @extend %banner;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1,
+    h2,
+    p {
+        padding-left: 5%;
+    }
+    .banner-head {}
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    p {
+        font-size: 1.2em;
+    }
+    .banner-footer {
+        @include flex-center(center);
+        height: 75px;
+        transition: all 1s ease-in-out;
+    }
+    .grow {
+        opacity: 1.0;
+        padding: none;
+        transform: translateY(-250%) scale(3);
+    }
+    a {
+        font-size: 1.5em;
+        padding: 0 12px;
+        &:hover {
+            text-shadow: 0 0 0.2em, 0 0 0.3em;
+        }
+    }
+}
+#projects {
+    @include flex-center(center);
+    flex-flow: column nowrap;
+    transition: 0.5s all;
+    & figcaption {
+        text-align: center;
+        font-size: 1.3em;
+    }
+    & .project-box {
+        @include flex-center(center);
+        flex: 7;
+    }
+    &.modal-dim::before {
+        background: rgba(0,0,0,0.65);
+        content: ' ';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+}
+.project-image {
+    height: 125px;
+    width: 200px;
+    border-radius: 2% / 4%;
+    box-shadow: 0 0 5px black;
+    margin: 2em;
+    transition: 1s filter, 1s -webkit-filter;
+    -webkit-filter: sepia(1);
+    filter: sepia(1);
+    &:hover {
+        -webkit-filter: none;
+        filter: none;
+    }
+}
+.footer {
+    width: 100vw;
+    background: linear-gradient(#222, #444);
+    color: $darkBackgroundText;
+    & p {
+        text-align: center;
+    }
+    & a:hover {
+        text-shadow: 0 0 0.5em rgba($darkBackgroundText, 0.5), 0 0 0.3em rgba($darkBackgroundText, 0.5);
+    }
+}
+#project-modal {
+    @include modal($modalWidth, $modalHeight);
+    display: none;
+    z-index: 100;
+    & .project-modal-header {
+        width: 100%;
+        height: 15%;
+        font-size: 1.5em;
+        @include flex-center(center);
+        & h3 {
+            width: 90%;
+            text-align: center;
+            margin: 0;
+        }
+        & span {
+            font-size: 1em;
+        }
+    }
+    & .project-modal-body {
+        height: 70%;
+        width: 100%;
+        @include flex-center(center);
+        & .modal-image-box {
+            height: 100%;
+            flex: 0 0 calc(#{$modalWidth} / 2);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            justify-content: center;
+            & .modal-image {
+                width: 400px;
+                height: 233px;
+                overflow: hidden;
+            }
+        }
+        & .project-modal-content {
+            height: 100%;
+            padding: 0 1.5em;
+            font-size: 1.1em;
+            flex: auto;
+            @include flex-center(center);
+            flex-flow: column nowrap;
+            & div {
+                width: 100%;
+                @include flex-center(space-around);
+                & p {
+                    padding: 5%;
+                    text-align: center;
+                }
+            }
+        }
+        & a:hover {
+            text-shadow: 0 0 0.5em lighten($mainText, 70%);
+        }
+    }
+}
+@supports ( (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) ) {
+    .background-blur {
+        -webkit-backdrop-filter: blur(15px) brightness(2);
+        backdrop-filter: blur(15px);
+    }
+}
+@supports ( not (backdrop-filter: blur(15px)) ) and (background: -moz-element(#body)) {
+    .background-blur::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: -moz-element(#body) fixed !important;
+        -webkit-filter: blur(15px);
+        filter: blur(15px);
+    }
+}
 @supports ( not (-webkit-backdrop-filter: blur(15px)) ) and ( not (background: -moz-element(#body)) ) {
-  .background-blur {
-    background: white !important;
-  }
-
+    .background-blur {
+        background: white !important;
+    }
 }
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
-and (orientation : portrait) {
-  .navbar {
-    height: 10em;
-  }
-  .banner {
-    height: calc(100vh - 30em);
-  }
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .navbar {
+        height: 10em;
+    }
+    .banner {
+        height: calc(100vh - 30em);
+    }
 }
