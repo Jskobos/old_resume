@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "description": "Personal website/portfolio for Jared Kobos",
+  "main": "app.js",
+  "authors": [
+    "Jared Kobos"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "babel",
+    "gulp",
+    "es2015"
+  ],
+  "homepage": "https://github.com/Jskobos/portfolio",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

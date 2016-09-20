@@ -7,18 +7,16 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-
+    plugins: ['karma-browserify','karma-jasmine','karma-chrome-launcher'],
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'browserify'],
-
-
-
+    frameworks: ['browserify', 'jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'src/', included: false},
-      {pattern: 'spec/', included: false}
+      'bower_components/jquery/dist/jquery.min.js',
+      {pattern: 'src/*.js', included: true},
+      {pattern: 'spec/*.js', included: true}
     ],
 
 
@@ -32,10 +30,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      "test/**/*.js": ["babel"],
-      "src/**/*.js": ["babel"],
-      "test/**/*.js": ["browserify"],
-      "src/**/*.js": ["browserify"]
+      "spec/**/*.js": ["browserify"],
+      "src/**/*.js": ["browserify"],
     },
 
     babelPreprocessor: {
@@ -51,10 +47,10 @@ module.exports = function(config) {
 
     browserify: {
       debug: true,
-      plugin: [ 'babelify' ]
+      "transform": [["babelify", { "presets": ["es2015"] }]]
     },
 
-    plugins: ['karma-browserify'],
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
