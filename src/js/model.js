@@ -1,5 +1,5 @@
 import { projects } from './projects';
-import { text } from './pagetext';
+import { text }     from './pagetext';
 
 class Model {
   constructor() {

@@ -347,7 +347,7 @@ var projects = [{
   }
 }, {
   year: 2015,
-  imageUrl: "http://www.placekitten.com/250/250",
+  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/rails-logo.png",
   liveUrl: null,
   sourceUrl: "https://github.com/Jskobos/shpads-api",
   EN: {
@@ -362,7 +362,7 @@ var projects = [{
   }
 }, {
   year: 2016,
-  imageUrl: "http://www.placekitten.com/250/250",
+  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/homepage.png",
   liveUrl: "#",
   sourceUrl: "https://github.com/Jskobos/portfolio",
   EN: {
