@@ -70,6 +70,8 @@ section.page {
 
 #main-page-banner {
   background: url("../assets/img/shanghai.jpg") no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-size: cover; }
 
 .banner-textbox {
