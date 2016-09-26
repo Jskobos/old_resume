@@ -317,7 +317,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var projects = [{
   year: 2016,
-  imageUrl: 'https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/frogger_landscape.png',
+  imageUrl: 'assets/img/frogger_landscape.png',
   liveUrl: '#',
   sourceUrl: 'https://github.com/Jskobos/frontend-nanodegree-arcade-game',
   EN: {
@@ -332,7 +332,7 @@ var projects = [{
   }
 }, {
   year: 2015,
-  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/inventory.png",
+  imageUrl: "assets/img/inventory.png",
   liveUrl: "https://shanghaipads.herokuapp.com",
   sourceUrl: "https://github.com/Jskobos/shanghai10",
   EN: {
@@ -347,7 +347,7 @@ var projects = [{
   }
 }, {
   year: 2015,
-  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/rails-logo.png",
+  imageUrl: "assets/img/rails-logo.png",
   liveUrl: null,
   sourceUrl: "https://github.com/Jskobos/shpads-api",
   EN: {
@@ -362,7 +362,7 @@ var projects = [{
   }
 }, {
   year: 2016,
-  imageUrl: "https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/homepage.png",
+  imageUrl: "assets/img/shanghai.jpg",
   liveUrl: "#",
   sourceUrl: "https://github.com/Jskobos/portfolio",
   EN: {
