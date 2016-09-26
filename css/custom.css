@@ -69,7 +69,8 @@ section.page {
   justify-content: center; }
 
 #main-page-banner {
-  background-image: url("https://s3-ap-northeast-1.amazonaws.com/kobos-portfolio/shanghai_cropped.jpg") cover no-repeat; }
+  background: url("../assets/img/shanghai.jpg") no-repeat;
+  background-size: cover; }
 
 .banner-textbox {
   display: flex;

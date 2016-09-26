@@ -45,7 +45,7 @@ const projects = [{
     }
 }, {
     year: 2016,
-    imageUrl: "assets/img/shanghai.jpg",
+    imageUrl: "assets/img/portfolio.jpg",
     liveUrl: "#",
     sourceUrl: "https://github.com/Jskobos/portfolio",
     EN: {
