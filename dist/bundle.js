@@ -280,7 +280,7 @@ var text = {
     portfolio: 'Portfolio',
     contact: 'Contact',
     language: '中文',
-    bannerHead: 'Front-End Developer',
+    bannerHead: 'Software Developer',
     bannerSubhead: 'Shanghai',
     bio: '',
     linkHover: ['Github', 'StackOverflow', 'LinkedIn', 'Email', 'Facebook', 'Instagram'],
@@ -295,7 +295,7 @@ var text = {
     portfolio: '我的项目',
     contact: '联系',
     language: 'English',
-    bannerHead: '前端开发工程师',
+    bannerHead: '软件工程师',
     bannerSubhead: '上海',
     bio: '',
     linkHover: ['Github', 'StackOverflow', 'LinkedIn', '电子邮件', '脸书', 'Instagram'],
@@ -316,19 +316,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var projects = [{
-  year: 2016,
-  imageUrl: 'assets/img/frogger_landscape.png',
-  liveUrl: '#',
-  sourceUrl: 'https://github.com/Jskobos/frontend-nanodegree-arcade-game',
+  year: 2017,
+  imageUrl: 'assets/img/imagesearch.png',
+  liveUrl: 'https://pacific-island-68565.herokuapp.com/',
+  sourceUrl: 'https://github.com/Jskobos/image-search',
   EN: {
-    name: 'Frogger',
-    hover: 'Project from Udacity Javascript course.',
-    description: 'This is a recommended project from the Udacity Frontend Engineer Nanodegree program. The game engine is provided by Udacity, and implementation is left to the students. I added scoring and gem rewards in addition to the basic game requirements.'
+    name: 'Image Search',
+    hover: 'Image search abstraction layer.',
+    description: 'Image search abstraction layer; project for FreeCodeCamp.com back end certification program.'
   },
   CN: {
-    name: 'Frogger',
-    hover: '优达学诚推荐的项目.',
-    description: '这是个优达学诚纳米学位推荐的项目。他们提供游戏引擎以及照片，学生要实施。除了项目的要求意外，我加了点数系统与奖金系统。'
+    name: '搜索照片',
+    hover: 'FCC项目.',
+    description: '这是一个FCC项目。你可以搜一下照片，结果是从 Google搜索API出来的。'
   }
 }, {
   year: 2015,
