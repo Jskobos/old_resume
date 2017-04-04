@@ -366,7 +366,7 @@ var projects = [{
   liveUrl: "#",
   sourceUrl: "https://github.com/Jskobos/portfolio",
   EN: {
-    name: 'Personal Website',
+    name: 'Portfolio Website',
     hover: 'Source code for this website.',
     description: 'Interactive personal homepage/portfolio (you\'re looking at it right now!) Made with jQuery, Animate.css and ECMA2015 (Babel); simple MVC framework and all other effects coded from scratch.'
   },
