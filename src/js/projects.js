@@ -1,17 +1,17 @@
 const projects = [{
     year: 2017,
     imageUrl: 'assets/img/imagesearch.png',
-    liveUrl: 'https://pacific-island-68565.herokuapp.com/',
-    sourceUrl: 'https://github.com/Jskobos/image-search',
+    liveUrl: 'https://jaredcharts.herokuapp.com/',
+    sourceUrl: 'https://github.com/Jskobos/pollution-charts',
     EN: {
-      name: 'Image Search',
-      hover: 'Image search abstraction layer.',
-      description: 'Image search abstraction layer; project for FreeCodeCamp.com back end certification program.'
+      name: 'Data Visualization',
+      hover: 'Sample charts using React and Highcharts.',
+      description: 'Sample charts using React and Highcharts.'
     },
     CN: {
-      name: '搜索照片',
-      hover: 'FCC项目.',
-      description: '这是一个FCC项目。你可以搜一下照片，结果是从 Google搜索API出来的。'
+      name: '数据可视化',
+      hover: '一些用React.js和Highcharts的表格.',
+      description: '一些用React.js和Highcharts的表格。'
     }
 }, {
     year: 2015,
@@ -57,6 +57,21 @@ const projects = [{
       name: '个人主页',
       hover: '本页网站的源码.',
       description: '本页网站的源码'
+    }
+},{
+    year: 2017,
+    imageUrl: 'assets/img/imagesearch.png',
+    liveUrl: 'https://pacific-island-68565.herokuapp.com/',
+    sourceUrl: 'https://github.com/Jskobos/image-search',
+    EN: {
+      name: 'Image Search',
+      hover: 'Image search abstraction layer.',
+      description: 'Image search abstraction layer; project for FreeCodeCamp.com back end certification program.'
+    },
+    CN: {
+      name: '搜索照片',
+      hover: 'FCC项目.',
+      description: '这是一个FCC项目。你可以搜一下照片，结果是从 Google搜索API出来的。'
     }
 }];
 
