@@ -1,6 +1,6 @@
 const projects = [{
     year: 2017,
-    imageUrl: 'assets/img/imagesearch.png',
+    imageUrl: 'assets/img/charts.png',
     liveUrl: 'https://jaredcharts.herokuapp.com/',
     sourceUrl: 'https://github.com/Jskobos/pollution-charts',
     EN: {

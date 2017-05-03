@@ -115,6 +115,7 @@ section.page {
     font-size: 1.3em; }
   #projects .project-box {
     display: flex;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
     flex: 7; }
@@ -157,7 +158,7 @@ section.page {
   width: 925px;
   margin: 0 calc(50% - 925px / 2);
   color: black;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 1);
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.8);
   display: none;
   z-index: 100; }
@@ -213,25 +214,9 @@ section.page {
 
 @supports (-webkit-backdrop-filter: blur(15px)) or (backdrop-filter: blur(15px)) {
   .background-blur {
+    background: rgba(255,255,255,0.65) !important;
     -webkit-backdrop-filter: blur(15px) brightness(2);
     backdrop-filter: blur(15px); } }
-
-@supports (not (backdrop-filter: blur(15px))) and (background: -moz-element(#body)) {
-  .background-blur::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: -moz-element(#body) fixed !important;
-    -webkit-filter: blur(15px);
-    filter: blur(15px); } }
-
-@supports (not (-webkit-backdrop-filter: blur(15px))) and (not (background: -moz-element(#body))) {
-  .background-blur {
-    background: white !important; } }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .navbar {
