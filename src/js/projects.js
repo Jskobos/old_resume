@@ -1,17 +1,17 @@
 const projects = [{
     year: 2017,
     imageUrl: 'assets/img/charts.png',
-    liveUrl: 'https://jaredcharts.herokuapp.com/',
-    sourceUrl: 'https://github.com/Jskobos/pollution-charts',
+    liveUrl: 'https://codepen.io/jaredsk/full/vmrdJz/',
+    sourceUrl: 'https://codepen.io/jaredsk/full/vmrdJz/',
     EN: {
       name: 'Data Visualization',
-      hover: 'Sample charts using React and Highcharts.',
-      description: 'Sample charts using React and Highcharts.'
+      hover: 'Scatterplot chart using D3.',
+      description: 'Scatterplot chart using D3.'
     },
     CN: {
       name: '数据可视化',
-      hover: '一些用React.js和Highcharts的表格.',
-      description: '一些用React.js和Highcharts的表格。'
+      hover: '一些用D3的表格.',
+      description: '一些用D3的表格。'
     }
 }, {
     year: 2015,
